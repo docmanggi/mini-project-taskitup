@@ -10,29 +10,29 @@ const props = defineProps({
 
 const emit = defineEmits(['edit'])
 
-// Calculate progress bar
+
 const progress = computed(() => {
   if (!props.task.subtasks || props.task.subtasks.length === 0) return 0
   const completed = props.task.subtasks.filter(st => st.isDone).length
   return Math.round((completed / props.task.subtasks.length) * 100)
 })
 
-// Calculate deadline urgency
+
 const deadlineStatus = computed(() => {
   if (!props.task.deadline) return 'no-deadline'
   
-  // If the task is finished, don't show warnings
+
   if (props.task.status === 'completed') return 'completed-task'
 
-  // Get today's date at midnight for an accurate comparison
+
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
-  // Get the task deadline date at midnight
+
   const taskDate = new Date(props.task.deadline)
   taskDate.setHours(0, 0, 0, 0)
 
-  // Calculate the difference in days
+ 
   const diffTime = taskDate - today
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
 
@@ -103,12 +103,12 @@ body.dark-theme .task-card:hover {
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
   padding: 16px;
-  margin: 0; /* We set this to 0 because the parent container is handling the gap now */
+  margin: 0; 
   cursor: grab;
   transition: all 0.2s ease;
 }
 
-/* Custom Progress Bar */
+
 .progress-wrapper {
   margin-top: 16px;
   padding-top: 16px;

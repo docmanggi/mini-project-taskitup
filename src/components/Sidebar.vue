@@ -3,7 +3,6 @@ import { useTaskStore } from '../stores/taskStore'
 
 const store = useTaskStore()
 
-// These props allow the App.vue file to talk to the sidebar
 defineProps(['activeView'])
 defineEmits(['navigate'])
 </script>
@@ -98,8 +97,7 @@ defineEmits(['navigate'])
   font-weight: 600;
 }
 
-/* Push the logout button and dark mode toggle to the bottom */
-/* Push the footer to the bottom */
+
 .spacer {
   flex-grow: 1;
 }

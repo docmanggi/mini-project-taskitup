@@ -4,7 +4,7 @@ import { useTaskStore } from '../stores/taskStore'
 
 const store = useTaskStore()
 const isSignUp = ref(false)
-const username = ref('') // Changed from email
+const username = ref('') 
 const password = ref('')
 
 function submit() {

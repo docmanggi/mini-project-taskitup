@@ -48,22 +48,22 @@ function handleDelete() {
 function submitTask() {
   if (!title.value.trim()) return
 
-  // 1. Get the current status or default to 'todo' for brand new tasks
+ 
   let currentStatus = props.editTaskData ? props.editTaskData.status : 'todo'
 
-  // 2. Check the subtasks array to see if we need to automate the column move
+
   if (subtasks.value.length > 0) {
-    // The .every() method checks if all items return true
+
     const allCompleted = subtasks.value.every(st => st.isDone)
 
     if (allCompleted) {
-      currentStatus = 'completed' // Auto-complete if 100%
+      currentStatus = 'completed' 
     } else if (currentStatus === 'completed' && !allCompleted) {
-      currentStatus = 'in-progress' // Auto-revert if they uncheck a box
+      currentStatus = 'in-progress' 
     }
   }
 
-  // 3. Build the payload with our calculated status
+ 
   const payload = {
     title: title.value,
     description: description.value,
@@ -72,7 +72,7 @@ function submitTask() {
     status: currentStatus 
   }
 
-  // 4. Send it to Supabase
+
   if (props.editTaskData) {
     store.updateTask(props.editTaskData.id, payload)
   } else {
@@ -176,7 +176,7 @@ function closeModal() {
 }
 .input-field:focus { outline: none; border-color: #2b6cb0; }
 
-/* Subtask Specific Styles */
+
 .subtask-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .subtask-header label { margin: 0; }
 .add-sub-btn { background: none; border: none; color: var(--accent-color); font-weight: 600; cursor: pointer; }

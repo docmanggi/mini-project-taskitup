@@ -18,10 +18,7 @@ onMounted(() => {
   store.fetchTasks()
 })
 
-/* Vue Draggable needs to modify arrays when you move items. 
-  Because our store uses read-only computed arrays, we create local writable 
-  versions here to prevent Vue from throwing console warnings.
-*/
+
 const todoList = computed({ get: () => store.todoTasks, set: () => {} })
 const inProgressList = computed({ get: () => store.inProgressTasks, set: () => {} })
 const completedList = computed({ get: () => store.completedTasks, set: () => {} })
@@ -149,15 +146,15 @@ function onDragChange(event, newStatus) {
 .board-columns {
   display: flex;
   flex-direction: row;
-  gap: 24px; /* Slightly wider gap between columns */
+  gap: 24px; 
   align-items: flex-start;
   width: 100%;
 }
 
 .column {
   flex: 1; 
-  min-width: 300px; /* Stops columns from squishing on small screens */
-  max-width: 400px; /* Stops columns from stretching too wide on large screens */
+  min-width: 300px; 
+  max-width: 400px;
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
@@ -174,8 +171,8 @@ function onDragChange(event, newStatus) {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 60px; /* Forces every header to be exactly the same height */
-  box-sizing: border-box; /* Ensures padding doesn't break the height limit */
+  height: 60px; 
+  box-sizing: border-box; 
 }
 
 .col-header h3 {
@@ -191,7 +188,6 @@ function onDragChange(event, newStatus) {
   padding: 16px; 
   flex-grow: 1;
   min-height: 150px;
-  /* This forces a strict 16px gap between every card no matter what */
   display: flex;
   flex-direction: column;
   gap: 16px; 
@@ -230,7 +226,7 @@ function onDragChange(event, newStatus) {
   border-color: var(--accent-color);
   transform: scale(1.05);
 }
-/* Prevent the filter text from stacking on top of itself */
+
 .calendar-filter label {
   white-space: nowrap;
   color: var(--text-muted);
@@ -238,7 +234,6 @@ function onDragChange(event, newStatus) {
   font-weight: 500;
 }
 
-/* Stop the search bar from shrinking too much when zoomed out */
 .search-bar {
   min-width: 250px;
 }

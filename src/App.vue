@@ -72,7 +72,7 @@ body {
   width: calc(100% - 250px);
 }
 
-/* Global Input & Filter Styling */
+
 input[type="text"], 
 input[type="email"], 
 input[type="password"], 

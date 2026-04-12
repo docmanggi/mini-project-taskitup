@@ -4,14 +4,13 @@ import { supabase } from '../supabase'
 import { toast } from 'vue3-toastify'
 
 export const useTaskStore = defineStore('task', () => {
-  // Existing state
+
   const tasks = ref([])
   const isLoading = ref(false)
   const searchQuery = ref('') 
   const selectedDateFilter = ref('') 
   const isDarkMode = ref(false)
   
-  // New Auth state
   const user = ref(null)
 
   const totalTasksCount = computed(() => tasks.value.length)
@@ -44,7 +43,7 @@ export const useTaskStore = defineStore('task', () => {
     }
   })
 
-  // NEW: Authentication Functions
+ 
   async function checkAuth() {
     const { data } = await supabase.auth.getSession()
     user.value = data.session?.user || null
@@ -57,7 +56,6 @@ export const useTaskStore = defineStore('task', () => {
     try {
       let result
       
-      // 1. Make the request to Supabase
       if (isSignUp) {
         result = await supabase.auth.signUp({ 
           email: formattedEmail, 
@@ -70,23 +68,22 @@ export const useTaskStore = defineStore('task', () => {
         })
       }
 
-      // 2. CHECK FOR ERRORS FIRST
+  
       if (result.error) throw result.error
 
-      // 3. If we made it past the error check, it is 100% successful! 
-      // Now we can safely show the correct popup.
+     
       if (isSignUp) {
         toast.success('Account created successfully.')
       } else {
         toast.success('Welcome back.')
       }
 
-      // 4. Save the user and download their board
+  
       user.value = result.data.user
       await fetchTasks()
       
     } catch (error) {
-      // If there was an error, it skips the success messages and lands right here
+
       toast.error(error.message)
       console.error(error)
     } finally {
@@ -97,11 +94,11 @@ export const useTaskStore = defineStore('task', () => {
   async function logOut() {
     await supabase.auth.signOut()
     user.value = null
-    tasks.value = [] // Clear the board when logging out
+    tasks.value = [] 
     toast.info('You have logged out.')
   }
 
-  // Existing Database Functions
+
   async function fetchTasks() {
     isLoading.value = true
     try {
@@ -119,7 +116,6 @@ export const useTaskStore = defineStore('task', () => {
   async function addTask(taskData) {
     isLoading.value = true
     try {
-      // We combine your task data with the logged-in user's unique ID
       const payload = {
         ...taskData,
         user_id: user.value.id
